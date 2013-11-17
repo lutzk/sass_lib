@@ -1,0 +1,8 @@
+// icon fonts
+$icon_font_path: "payango_icons" !default
++font-face("payango_icons", font-files("#{$icon_font_path}.woff", woff, "#{$icon_font_path}.ttf", truetype,"#{$icon_font_path}.svgz#payango_icons", svg, "#{$icon_font_path}.svg#payango_icons", svg), "#{$icon_font_path}.eot", normal, normal)
+
+//icon fonts base64
+//inline-font-files fails in rails engine
+// File not found or cannot be read: ...code/p3/platypus/app/assets/fonts/payango_icons.woff
+//+font-face("payango_icons", inline-font-files("#{$icon_font_path}.woff", woff, "#{$icon_font_path}.ttf", truetype), normal, normal)

@@ -1,0 +1,64 @@
+//addbocker stuff
+=addblock_warner
+  .addblocker_overlay
+    display: none
+    +screen_mask($use_bgimage: true)
+  .addblocker_container
+    display: none
+    position: fixed
+    +mask_container(500px)
+    .msg
+      +mask_msg
+      .close_x
+        position: absolute
+        top: -10px 
+        right: 0px
+        font-weight: bold
+        font-size: $font_size_big + 2px
+        padding: $padding_double
+        cursor: pointer 
+        &:hover
+          color: $white
+  
+  //addblock honeypot element
+  #werbung,
+  .advertising-element
+    display: block
+    position: absolute
+    z-index: -1000
+    width: 1px 
+    height: 1px 
+    top: -1000px
+    left: -1000px
+
+=cookie_warner
+  .cookie_warner_overlay
+    display: none
+    +screen_mask($use_bgimage: true)
+  .cookie_warner
+    display: none
+    position: fixed
+    +mask_container(500px)
+    .msg
+      +mask_msg
+      .close_x
+        position: absolute
+        top: -10px 
+        right: 0px
+        font-weight: bold
+        font-size: $font_size_big + 2px
+        padding: $padding_double
+        cursor: pointer 
+        &:hover
+          color: $white 
+          
+=noscript
+  .noscript_overlay
+    +screen_mask($use_bgimage: true)
+    .noscript_container
+      +center_element(500px)
+      background-color: #ff0000
+      margin-top: 15%
+      +mask_container(500px)
+      .msg
+        +mask_msg 

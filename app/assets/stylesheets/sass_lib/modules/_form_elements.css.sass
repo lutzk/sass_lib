@@ -1,0 +1,60 @@
+=inputs
+  textarea,
+  input[type="text"],
+  input[type="password"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="color"],
+  select
+    background-color: $form_bg_color //transparent
+    line-height: adjust_leading_to(1)
+    font-size: adjust_font_size_to($base_font_size)
+    color: $form_font_color //$text_color
+    padding: 3px $padding_slim
+    border: 1px solid $form_border_color //$gray
+    +border-radius($form_border_radius)
+    +box_model(border-box)
+    +transition(all $transition_duration_slow linear)
+    display: inline-block
+    outline-color: transparent
+    outline-style: none
+    &.input-error
+      background-color: lighten($twb_red, 30%) !important
+      color: $white !important
+      border-color: $twb_red !important
+      +box-shadow(0px 0px 5px 1px rgba($twb_red, 0.8))
+      &:active, &:focus
+        +box-shadow(0px 2px 4px rgba($black, 0.23) inset, 0px 0px 5px 1px rgba($twb_red, 0.8))
+    &:active, &:focus
+      outline-color: transparent
+      outline-style: none
+      border: 1px solid $form_active_border_color//$brand_color
+      border: 1px solid rgba($form_active_border_color, 0.88)
+      background-color: $form__active_bg_color
+      +box-shadow(0px 2px 4px rgba($black, 0.23) inset, 0px 0px 6px $brand_color_light)
+      +transition(all $transition_duration_fast linear)
+      color: $form_active_font_color
+
+  select
+    background-color: none
+    box-shadow: none
+    &:active, &:focus
+      background-color: $white
+      box-shadow: none
+
+=labels
+  label
+    line-height: adjust_leading_to(1)
+    font-size: adjust_font_size_to($base_font_size)
+    color: $form_font_color
+    padding: 3px $padding_slim
+    white-space: nowrap 

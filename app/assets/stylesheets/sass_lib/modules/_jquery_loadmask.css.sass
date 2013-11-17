@@ -1,0 +1,35 @@
+=payango_loadmask
+  .loadmask
+    +screen_mask($use_bgimage: true)
+  .loadmask-msg
+    +mask_container(100%, $white, $plm_msg_bg_color ,$plm_border_color)
+    // position: fixed !important
+    // left: 0
+    // top: 0
+    // z-index: 20001
+    // border: 1px solid $plm_border_color
+    // +border-radius(5px)
+    // +box-shadow(0px 0px 10px $plm_box_shadow_color)
+    // background-color: $plm_msg_bg_color
+    // overflow: hidden
+    div
+      +mask_msg($plm_msg_txt_color, 150px)
+      // color: $plm_msg_txt_color
+      // padding: 15px 25px 15px 0
+      // width: 150px
+      cursor: wait
+      font-size: 18px
+      text-align: right
+      background:
+        image: url($plm_spinner_img)
+        repeat: no-repeat
+        position: 25px center
+
+  .masked
+    overflow: hidden !important
+
+  .masked-relative
+    //position: relative !important;
+
+  .masked-hidden
+    visibility: hidden !important

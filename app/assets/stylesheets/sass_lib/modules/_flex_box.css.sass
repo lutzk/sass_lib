@@ -1,0 +1,113 @@
+//genal bar as flex box container for flex elements
+// with one row
+// example usage:
+//
+// +flex_bar(test_bar, test_cell, 5, $mid_breakpoint, false)
+//   color: $twb_red
+//   a 
+//     color: $twb_green
+//
+=flex_bar($bar_classname, $cell_classname, $cell_count, $breakpoint, $break_on_small_screen: false, $reduce_cells_on_break: false, $reduced_count: 1)
+  $cell_width: 100% / $cell_count
+  $small_sceen_cell_width: 100% / $reduced_count
+  ul.#{$bar_classname}
+    width: 100%
+    +pie-clearfix
+    +flex_display_flex
+    +box_model(border-box)
+    .#{$cell_classname}
+      +flex_flex(1, $cell_width)
+      +box_model(border-box)
+      text-align: center
+      @content
+    @if $break_on_small_screen
+      @media screen and (max-width: $breakpoint)
+        display: block
+        .#{$cell_classname}
+          +flex_flex(none, 100%)
+          display: block
+          float: none
+          +margin-trailer(1)
+          &:nth-child(2)
+            border: none
+    @else 
+      @if $reduce_cells_on_break
+        @media screen and (max-width: $breakpoint)
+          .#{$cell_classname}
+            +flex_flex(1, $small_sceen_cell_width)
+            &:nth-child(2)
+              border: none
+          .hide 
+            display: none
+          .key,.data 
+            display: inline
+          .key 
+            padding-right: $padding_slim
+
+//so it will works...
+// or just use the mixin above
+// it implemets these structure
+// .SOME_ELEMENT
+//   +reset_spaces
+//   display: block
+//   +flex_display_flex
+//   .SOME_CHILD_ELEMENT
+//     +reset_spaces
+//     +flex_flex(1, 25%)
+//     text-align: center
+=flex_display_flex
+  -webkit-box-pack: start
+  -moz-box-pack: start
+  -webkit-justify-content: flex-start
+  -ms-flex-pack: start
+  justify-content: flex-start
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  -webkit-box-align: start
+  -moz-box-align: start
+  -webkit-align-items: flexstart
+  -ms-flex-align: start
+  align-items: flex-start
+  //old syntx
+  display: -webkit-box
+  display: -moz-box
+  //new syntax
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: -moz-flex
+  display: -o-flex
+  display: -ms-flex
+  display: flex
+
+=flex_flex($count, $width)
+  //old
+  -webkit-box-flex: $count
+  -moz-box-flex: $count
+  -ms-box-flex: $count
+  box-flex: $count
+  //fallback
+  width: $width
+  //new
+  -moz-flex: $count
+  -webkit-flex: $count $count auto
+  -ms-flex: $count $count auto
+  -o-flex: $count
+  flex: $count
+
+=flex_container
+  +reset_spaces
+  display: block
+  +flex_display_flex
+
+=flex_child($count, $width)
+  +reset_spaces
+  +flex_flex($count, $width)
+  text-align: center
+
+=flex_order($order)
+  -webkit-box-ordinal-group: $order
+  -moz-box-ordinal-group: $order
+  -ms-flex-order: $order
+  -webkit-order: $order
+  order: $order

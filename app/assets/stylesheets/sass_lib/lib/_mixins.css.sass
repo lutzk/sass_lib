@@ -1,0 +1,141 @@
+=inline
+  display: inline
+  float: left
+
+=reset_spaces
+  margin: 0
+  padding: 0px
+
+=vertical_margin($count, $bottom: $count)
+  +margin-leader($count)
+  +margin-trailer($bottom)
+
+=vertical_padding($count, $bottom: $count)
+  +padding-leader($count)
+  +padding-trailer($bottom)
+
+=box_model($box_sizing)
+  -webkit-box-sizing: $box_sizing
+  -moz-box-sizing: $box_sizing
+  -ms-box-sizing: $box_sizing
+  box-sizing: $box_sizing
+  @content
+
+=opacity($opacity)
+  filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})")
+  opacity:  $opacity
+
+=unselectable
+  -moz-user-select: none
+  -khtml-user-select: none
+  -webkit-user-select: none
+  -o-user-select: none
+  user-select: none
+
+=center_element($width)
+  width: $width
+  margin-left: auto
+  margin-right: auto
+
+=headline($hl_font_size: $h1_size, $hl_color: $headline_color , $hl_font_weight: bold, $hl_text_align: left, $adjust_leading_to: 1)
+  font-size: $hl_font_size
+  color: $hl_color
+  text-align: $hl_text_align
+  font-weight: $hl_font_weight
+  line-height: adjust_leading_to($adjust_leading_to)
+  @content
+
+=hrule($slim: false)
+  height: 2px
+  width: $hrule_width
+  @if $slim
+    margin: $padding_slim auto $padding_slim auto
+  @else
+    margin: $padding + $padding_slim auto $padding_tripple auto
+  background: 
+    image: url($hrule_img)
+    repeat: repeat-x
+    position: center center
+
+=colums_to_classes($cast_px_to_per: false)
+  @for $i from 1 through $grid_columns
+    @if $cast_px_to_per
+      .#{ $colum_class_name_per }#{ $i }
+        $w: round(px2per(colum_span($i),$layout_width))
+        width: $w !important
+        // @debug $w
+        // @debug "percent"
+        @content
+    @else
+      .#{ $colum_class_name_px }#{ $i }
+        width: colum_span($i)
+        // @debug colum_span($i)
+        // @debug "pixel"
+        @content
+
+=placeholder_style($color)
+  &::-webkit-input-placeholder
+    color: $color
+  &:-moz-placeholder
+    color: $color
+  &::-moz-placeholder
+    color: $color
+  &:-ms-input-placeholder
+    color: $color
+
+=screen_mask($screen_mask_image: "1px50percent_black.png", $use_bgimage: false, $use_bgcolor: false, $bg_color: $black )
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: 10000
+  position: fixed
+  background:
+    @if $use_bgimage
+      image: url($screen_mask_image)
+    @if $use_bgcolor
+      color: rgba($black, 0.33)
+      
+=mask_container($width: 100px, $border_color: $white, $bg_color: $twb_red, $box_shadow_color: $twb_red )
+  width: $width
+  border: 1px solid $border_color
+  z-index: 10001
+  background:
+    color: $bg_color
+  +border-radius(5px)
+  +box-shadow(0px 0px 15px 3px rgba($box_shadow_color, 0.8))
+
+=mask_msg($color: $white, $width: auto )
+  width: $width
+  padding: $padding_tripple $padding_double $padding_double
+  position: relative
+  h1,h3,p,a
+    color: $white
+
+=password_safety_checker
+  .pwd_safety_explanation
+    float: left
+    font-size: $font_size_small
+    padding-left: 172px
+    padding-top: 5px
+  .password_safety_check
+    display: inline-block
+    float: left
+    overflow: hidden
+    position: relative
+    width: 363px
+    .password_strenght_indicator_bar
+      display: block
+      color: $white
+      font-size: $font_size_small
+      +transition(all $transition_duration_slow)
+      +border-radius(3px)
+      background-color: $twb_red
+      padding: 3px
+      padding-left: 5px
+      &.medium
+        background-color: shade(orange, 10%)
+      &.good, &.very_good
+        background-color: $twb_green
+   
+

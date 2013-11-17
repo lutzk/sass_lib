@@ -1,0 +1,53 @@
+//make color and style indeepentent
+=account_nav_mobile($nav_list: true)
+  +background-image(linear-gradient(#37414f, darken(rgba(#262d39,0.95),10%)   ))
+  +box-shadow(0 10px 10px rgba($black,0.33))
+  display: block
+  list-style: none outside none
+  +reset_spaces
+  +pie-clearfix
+  position: absolute
+  top: 50px
+  width: 100%
+  height: auto
+  z-index: 100
+  border-top: 1px solid #ccc
+  li 
+    display: block
+    float : none
+    list-style: none
+    text-align: center
+    border-top: 1px dashed rgba(#d7dde6,0.33)
+    +reset_spaces
+    +pie-clearfix
+    &.brand 
+      display: none
+    @if $nav_list
+      &:nth-child(2)
+        margin-top: $padding_double
+        border-top: 0px
+    @else
+      &:first-child
+        margin-top: $padding_double
+        border-top: 0px
+    &:last-child
+      margin-bottom: $padding_double
+    a
+      +reset_spaces
+      display: block
+      line-height: adjust_leading_to(1)
+      padding: ($padding + $padding_slim) 0
+      &:hover
+        background-color: rgba(#d7dde6,0.33)
+
+=nav_li($line_height: $lheight)
+  li
+    +inline
+    a 
+      line-height: $line_height
+      padding: 0 $padding_double
+      cursor: pointer
+      color: #92a5c0
+      &:hover
+        color: $white
+    @content

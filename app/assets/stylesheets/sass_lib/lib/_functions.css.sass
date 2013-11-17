@@ -1,0 +1,24 @@
+@function px2per($target, $container)
+  @return ($target / $container) * 100%
+
+@function colum_span($times)
+  @return $grid_colum_width * $times + $grid_margin * ($times - 1)
+
+@function grid_to_colums() 
+  $base: $layout_width / $grid_columns
+  $width: $base*$times
+  @if $cast_px_to_per
+    @return round(px2per($width,$layout_width))
+  @else
+    @return round($width)
+
+@function adjust_leading_to($lines, $font-size: $base-font-size)
+  @return rhythm($lines, $font-size)
+
+@function adjust_font_size_to($to-size, $lines: lines-for-font-size($to-size), $from-size: $base-font-size)
+  @if not $relative-font-sizing and $from-size != $base-font-size 
+    @warn "$relative-font-sizing is false but a relative font size was passed to adjust-font-size-to"
+  @return $font-unit * $to-size / $from-size
+    
+@function strip_unit($number) 
+  @return $number / ($number * 0 + 1)

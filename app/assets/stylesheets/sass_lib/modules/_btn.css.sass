@@ -1,0 +1,63 @@
+=btn_constants
+  cursor: pointer
+  white-space: nowrap
+  text-decoration: none
+  text-align: center
+
+=button-reset
+  +reset-box-model
+  overflow: visible
+  vertical-align: baseline
+  color: inherit
+  font: inherit
+
+=btn($font_size: $btn_font_size, $display: $btn_display, $top_color: $btn_top_color, $bottom_color: $btn_bottom_color, $border_color: $btn_border_color, $dissabled: false, $btn_v_pad: $btn_v_padding, $btn_h_pad: $btn_h_padding)
+  +button-reset
+  +box_model(border-box)
+  +btn_constants
+  width: $btn_width
+  padding: $btn_v_pad $btn_h_pad
+  height: $btn_height
+  color: $btn_text_color
+  font-size: $font_size
+  font-weight: $btn_font_weight
+  line-height: $btn_line_height
+  +text-shadow( $btn_txt_shadow_color 0 1px 2px  )
+  +transition(all $transition_duration_fast linear)
+  display: $display
+  background:
+    color: $btn_bg_color
+  +background-image( linear-gradient($top_color, $bottom_color ))
+  border: $btn_border $btn_border_color_ie
+  border: $btn_border $border_color
+  @debug $btn_border
+  @debug $border_color
+  +border-radius($btn_border_radius)
+  &::-moz-focus-inner
+    border: 0
+    padding: 0
+    margin: 0
+  @if $dissabled
+    @debug $dissabled
+    +box-shadow( rgba($btn_box_shadow_color_dissabled,0.33) 0px 2px 5px 0px )
+    &:hover
+      color: $btn_text_color
+      cursor: default
+      cursor: not-allowed
+  @else
+    opacity: $btn_opacity
+    +box-shadow( $btn_box_shadow_color 0px 2px 5px 0px )
+    &:hover
+      opacity: $btn_opacity_active
+      color: $btn_text_color
+      +text-shadow( $btn_txt_shadow_color_hover 0 1px 2px)
+      +transition(all $transition_duration_fast linear)
+    &:active
+      opacity: $btn_opacity_active
+      color: $btn_text_color
+      +text-shadow( $btn_txt_shadow_color_hover 0 1px 2px)
+      +transition(all $transition_duration_fast linear)
+      +background-image( linear-gradient($bottom_color, $top_color))
+      +box-shadow( $btn_box_shadow_color 0px 2px 5px 0px, $btn_box_shadow_color_inset 0px 2px 5px 0px inset )
+
+  
