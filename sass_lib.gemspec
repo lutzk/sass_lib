@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "railties", ">= 3.1.0"
+  s.add_dependency "railties", ">= 3.2.13"
 
   # s.add_dependency "rails", "~> 4.0.0"
   # s.add_dependency "sass-rails", "~> 4.0.0"
