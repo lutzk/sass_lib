@@ -32,17 +32,52 @@
   -o-user-select: none
   user-select: none
 
+=positioned($how: absolute, $top: 0px, $left: 0px, $sticked: false, $where: false)
+  position: $how
+  @if $sticked
+    @if $where == top
+      top: 0px
+    @else if $where == bottom
+      bottom: 0px
+    @else if $where == right
+      right: 0px
+    @else if $where == left
+      left: 0px
+    @else if $where == topright
+      top: 0px
+      right: 0px
+    @else if $where == topleft
+      top: 0px
+      left: 0px
+    @else if $where == bottomright
+      bottom: 0px
+      right: 0px
+    @else if $where == bottomleft
+      bottom: 0px
+      left: 0px
+  @else
+    top: $top
+    left: $left
+
+=dimensions($w: auto, $h: auto, $sqr: false)
+  width: $w
+  @if $sqr
+    height: $w
+  @else
+    height: $h
+
 =center_element($width)
   width: $width
   margin-left: auto
   margin-right: auto
 
-=headline($hl_font_size: $h1_size, $hl_color: $headline_color , $hl_font_weight: bold, $hl_text_align: left, $adjust_leading_to: 1)
-  font-size: $hl_font_size
-  color: $hl_color
-  text-align: $hl_text_align
-  font-weight: $hl_font_weight
-  line-height: adjust_leading_to($adjust_leading_to)
+=headline($hl_color: $headline_color, $hl_font_size: $h1_size, $hl_font_weight: normal, $hl_text_align: left, $hl_font_family: $font_family, $hl_adjust_leading_to: 1)
+  color:         $hl_color
+  font-size:     $hl_font_size
+  text-align:    $hl_text_align
+  font-weight:   $hl_font_weight
+  font-family:   $hl_font_family
+  line-height:   adjust_leading_to($hl_adjust_leading_to)
   @content
 
 =hrule($slim: false)

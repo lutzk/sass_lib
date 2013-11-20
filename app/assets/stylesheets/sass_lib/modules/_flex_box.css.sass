@@ -1,8 +1,9 @@
-//genal bar as flex box container for flex elements
+// genal bar as flex box container for flex elements
 // with one row
-// example usage:
 //
-// +flex_bar(test_bar, test_cell, 5, $mid_breakpoint, false)
+// usage:
+//
+// +flex_bar(BARCLASS, CELLCLASS, CELL_COUNT, BREAKPOINT, BREAK?)
 //   color: $twb_red
 //   a 
 //     color: $twb_green
@@ -44,7 +45,7 @@
           .key 
             padding-right: $padding_slim
 
-//so it will works...
+// so it will works...
 // or just use the mixin above
 // it implemets these structure
 // .SOME_ELEMENT
@@ -72,6 +73,8 @@
   //old syntx
   display: -webkit-box
   display: -moz-box
+  //check
+  display: box
   //new syntax
   display: -ms-flexbox
   display: -webkit-flex
@@ -80,14 +83,20 @@
   display: -ms-flex
   display: flex
 
-=flex_flex($count, $width)
+=flex_flex($count, $width: false)
+  $width_for_fallback: 100 / $count
+  // needs check whats better use floor for now to be safe and not have more than 100%
+  $w: round($width_for_fallback)
+  //$w: floor($width_for_fallback)
+  @if unitless($w)
+    $w: percentage($w)
   //old
   -webkit-box-flex: $count
   -moz-box-flex: $count
   -ms-box-flex: $count
   box-flex: $count
   //fallback
-  width: $width
+  width: $w
   //new
   -moz-flex: $count
   -webkit-flex: $count $count auto

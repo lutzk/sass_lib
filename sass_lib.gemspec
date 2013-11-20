@@ -7,13 +7,10 @@ require "sass_lib/version"
 Gem::Specification.new do |s|
   s.name        = "sass_lib"
   s.version     = SassLib::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of SassLib."
-  s.description = "TODO: Description of SassLib."
+  s.authors     = ["lutzk"]
+  s.summary     = "sass_lib"
 
-  s.files = Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 4.0.0"
   s.add_dependency "sass-rails", "~> 4.0.0"
