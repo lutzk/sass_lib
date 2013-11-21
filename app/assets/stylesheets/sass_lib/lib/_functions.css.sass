@@ -1,6 +1,15 @@
 @function px2per($target, $container)
   @return ($target / $container) * 100%
 
+@function px2rem($value)
+  @if type-of($value) == number and not unitless($value) and (unit($value) == px)
+    @if unit($value) == px
+      @return convert-length($value, rem)
+    @else
+      @return $value
+  @else
+    @warn "value was not in px - need to be px..."
+
 @function colum_span($times)
   @return $grid_colum_width * $times + $grid_margin * ($times - 1)
 
@@ -15,10 +24,30 @@
 @function adjust_leading_to($lines, $font-size: $base-font-size)
   @return rhythm($lines, $font-size)
 
-@function adjust_font_size_to($to-size, $lines: lines-for-font-size($to-size), $from-size: $base-font-size)
-  @if not $relative-font-sizing and $from-size != $base-font-size 
-    @warn "$relative-font-sizing is false but a relative font size was passed to adjust-font-size-to"
-  @return $font-unit * $to-size / $from-size
+//
+// returns font size in rem when set to true - no px fallback - it just return the value in rem
+//
+// usage:
+// .selector
+//   font-size: new_adjust_font_size_to(VALUE:PX)
+//
+// if you want a px fallback use the original mixin from compass:
+//
+// .selector
+//   +adjust_font_size_to(VALUE:PX)
+//
+@function rem_adjust_font_size_to($to-size, $lines: auto, $from-size: $base-font-size)
+  $to-size: convert-length($to-size, px, $from-size)
+  @if $lines == auto
+    $lines: lines-for-font-size($to-size)
+  //+output-rhythm(font-size, convert-length($to-size, $rhythm-unit, $from-size))
+  //+adjust-leading-to($lines, $to-size 
+  @return convert-length($to-size, $rhythm-unit, $from-size)
+
+// @function adjust_font_size_to($to-size, $lines: lines-for-font-size($to-size), $from-size: $base-font-size)
+//   @if not $relative-font-sizing and $from-size != $base-font-size 
+//     @warn "$relative-font-sizing is false but a relative font size was passed to adjust-font-size-to"
+//   @return $font-unit * $to-size / $from-size
     
 @function strip_unit($number) 
   @return $number / ($number * 0 + 1)
